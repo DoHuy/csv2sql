@@ -1,0 +1,111 @@
+INSERT INTO public.bill ("id", "totalPrice", "state", "subscriptionId", "organizationId", "paymentType", "dueDate", "action", "numberOfExtraSeats")
+VALUES('e2b485a9-7a17-4ce8-bf6b-a20c12375062', 3136, 'paid', '05420079-fb4f-45fa-902c-22b0a6c5f1e7', '73334903-0512-48f1-8a05-03c6ce83b602', 'offline', date '2022-04-22' + INTERVAL '1 YEAR', 'Subscription Renewal', 4); 
+
+INSERT INTO public.price_mapping ("id", "numberOfSeats", "price", "discount")
+VALUES('339e3693-c223-49fd-94c6-245f36baf3d6', 4, 3136, 0.00); 
+
+UPDATE public.subscription 
+SET "startDate"='2022-04-22', "endDate"=date date '2022-04-22' + INTERVAL '1 YEAR', "priceMappingId"='339e3693-c223-49fd-94c6-245f36baf3d6'
+                                        WHERE id=(SELECT public.organization."subscriptionId" FROM public.organization WHERE id = '73334903-0512-48f1-8a05-03c6ce83b602');
+
+INSERT INTO public.organization_payment_metadata ("firstName", "lastName", "email", "country", "seat", "billingPlan", "paymentType", "userId")
+VALUES('Ilene', 'Hardy', 'ilene.hardy@woodbois.com', 'United Kingdom', 4, 'Annually', 'offline', '10b8d9a0-9c78-4125-ada2-f79946133923'); 
+
+INSERT INTO public.bill ("id", "totalPrice", "state", "subscriptionId", "organizationId", "paymentType", "dueDate", "action", "numberOfExtraSeats")
+VALUES('83cb2cce-dd08-4387-a3c1-3f3d7cfc7e53', 1188, 'paid', 'b5665e0e-adf8-4edd-87d1-839c906668b0', '9f330b3f-8425-4ece-b939-5ed57ae8dfe8', 'offline', date '2022-04-22' + INTERVAL '1 YEAR', 'Subscription Renewal', 1); 
+
+INSERT INTO public.price_mapping ("id", "numberOfSeats", "price", "discount")
+VALUES('63b96782-dadb-4ad7-ad2d-f0e2d40671c4', 1, 1188, 0.00); 
+
+UPDATE public.subscription 
+SET "startDate"='2022-04-22', "endDate"=date '2022-04-22' + INTERVAL '1 YEAR', "priceMappingId"='63b96782-dadb-4ad7-ad2d-f0e2d40671c4'
+                                        WHERE id = (SELECT public.organization."subscriptionId" FROM public.organization WHERE id = '9f330b3f-8425-4ece-b939-5ed57ae8dfe8');
+
+INSERT INTO public.organization_payment_metadata ("firstName", "lastName", "email", "country", "seat", "billingPlan", "paymentType", "userId")
+VALUES('Joel', 'Reyes', 'safcacaooro2020@gmail.com', 'Nicaragua', 1, 'Annually', 'offline', '10b8d9a0-9c78-4125-ada2-f79946133923'); 
+
+INSERT INTO public.bill ("id", "totalPrice", "state", "subscriptionId", "organizationId", "paymentType", "dueDate", "action", "numberOfExtraSeats")
+VALUES('485a846e-3401-4733-8a69-eee240ae6d19', 3136, 'paid', 'cdabad9b-c127-4199-8111-6e1962fd283e', 'acff04aa-7000-4b05-b484-1331077ff971', 'offline', date '2022-04-22' + INTERVAL '1 YEAR', 'Subscription Renewal', 3); 
+
+INSERT INTO public.price_mapping ("id", "numberOfSeats", "price", "discount")
+VALUES('d97a4dfc-c0eb-410e-b6bc-2368d9146420', 3, 3136, 0.00); 
+
+UPDATE public.subscription 
+SET "startDate"='2022-04-22', "endDate"=date '2022-04-22' + INTERVAL '1 YEAR', "priceMappingId"='d97a4dfc-c0eb-410e-b6bc-2368d9146420'
+                                        WHERE id=(SELECT public.organization."subscriptionId" FROM public.organization WHERE id = 'acff04aa-7000-4b05-b484-1331077ff971');
+
+INSERT INTO public.organization_payment_metadata ("firstName", "lastName", "email", "country", "seat", "billingPlan", "paymentType", "userId")
+VALUES('Amy', 'Barlow', 'amybarlow@iqep.com', 'United Kingdom', 3, 'Annually', 'offline', '10b8d9a0-9c78-4125-ada2-f79946133923'); 
+
+
+
+
+UPDATE public.subscription 
+SET "endDate"=date '2022-04-22' + INTERVAL '6 MONTHS'
+                                        WHERE id=(SELECT public.organization."subscriptionId" FROM public.organization WHERE id = 'e2bb4ec1-81be-4ab8-91a0-4c740ef544a1');
+
+UPDATE public.bill 
+SET "dueDate"=date '2022-04-22' + INTERVAL '6 MONTHS'
+                                     WHERE public.bill."id"=(select public.bill."id" from public.bill where public.bill."organizationId"='e2bb4ec1-81be-4ab8-91a0-4c740ef544a1' AND public.bill."action" = 'Create Subscription' AND public.bill."paymentType" = 'offline' order by "dueDate" desc limit 1);
+UPDATE public.price_mapping 
+SET "numberOfSeats"=7 WHERE id=(select public.subscription."priceMappingId" from public.subscription where public.subscription."id"='d8c25c1b-b436-490c-a2f4-ed950cc1dbcd');
+
+UPDATE public.subscription 
+SET "endDate"=date '2022-04-22' + INTERVAL '6 MONTHS'
+                                        WHERE id=(SELECT public.organization."subscriptionId" FROM public.organization WHERE id = '0e875c3e-1592-47a5-950d-343b91bda8c5');
+
+UPDATE public.bill 
+SET "dueDate"=date '2022-04-22' + INTERVAL '6 MONTHS'
+                                     WHERE public.bill."id"=(select public.bill."id" from public.bill where public.bill."organizationId"='0e875c3e-1592-47a5-950d-343b91bda8c5' AND public.bill."action" = 'Create Subscription' AND public.bill."paymentType" = 'offline' order by "dueDate" desc limit 1);
+
+UPDATE public.subscription 
+SET "endDate"=date '2022-04-22' + INTERVAL '3 MONTHS'
+                                        WHERE id=(SELECT public.organization."subscriptionId" FROM public.organization WHERE id = 'af524d68-2545-414a-910a-ad670bbab493');
+
+UPDATE public.bill 
+SET "dueDate"=date '2022-04-22' + INTERVAL '3 MONTHS'
+                                     WHERE public.bill."id"=(select public.bill."id" from public.bill where public.bill."organizationId"='af524d68-2545-414a-910a-ad670bbab493' AND public.bill."action" = 'Create Subscription' AND public.bill."paymentType" = 'offline' order by "dueDate" desc limit 1);
+UPDATE public.price_mapping 
+SET "numberOfSeats"=4 WHERE id=(select public.subscription."priceMappingId" from public.subscription where public.subscription."id"='e41c9e44-e767-421c-8c7f-66c9fc3925e6');
+
+UPDATE public.subscription 
+SET "endDate"=date '2022-04-22' + INTERVAL '3 MONTHS'
+                                        WHERE id=(SELECT public.organization."subscriptionId" FROM public.organization WHERE id = '961f21f5-63fc-47d2-9a68-4d64392ca3e2');
+
+UPDATE public.bill 
+SET "dueDate"=date '2022-04-22' + INTERVAL '3 MONTHS'
+                                     WHERE public.bill."id"=(select public.bill."id" from public.bill where public.bill."organizationId"='961f21f5-63fc-47d2-9a68-4d64392ca3e2' AND public.bill."action" = 'Create Subscription' AND public.bill."paymentType" = 'offline' order by "dueDate" desc limit 1);
+
+
+
+
+UPDATE public."user" SET "status" = 'locked' WHERE public."user"."id" IN (SELECT public.organization_user."userId" FROM public.organization_user WHERE public.organization_user."organizationId" = 'a92b8ab2-a33e-41c9-a44a-3d5a74c5aab5');
+
+UPDATE public."organization" SET "status" = 'inactive' WHERE public."organization"."id" = 'a92b8ab2-a33e-41c9-a44a-3d5a74c5aab5';
+
+UPDATE public."subscription" SET "status" = 'cancelled' WHERE public."subscription"."id" = 'd920cae2-43f7-4885-b9ac-7a0a74f49883';
+
+UPDATE public."user" SET "status" = 'locked' WHERE public."user"."id" IN (SELECT public.organization_user."userId" FROM public.organization_user WHERE public.organization_user."organizationId" = 'cec70262-09b9-4201-aff3-3f12fa06c58b');
+
+UPDATE public."organization" SET "status" = 'inactive' WHERE public."organization"."id" = 'cec70262-09b9-4201-aff3-3f12fa06c58b';
+
+UPDATE public."subscription" SET "status" = 'cancelled' WHERE public."subscription"."id" = 'a766ea7f-9c90-47b8-9b9c-bc21a5a915f2';
+
+UPDATE public."user" SET "status" = 'locked' WHERE public."user"."id" IN (SELECT public.organization_user."userId" FROM public.organization_user WHERE public.organization_user."organizationId" = '5a57d447-9fce-4636-83b4-a5f29e7442e9');
+
+UPDATE public."organization" SET "status" = 'inactive' WHERE public."organization"."id" = '5a57d447-9fce-4636-83b4-a5f29e7442e9';
+
+UPDATE public."subscription" SET "status" = 'cancelled' WHERE public."subscription"."id" = 'e825ac18-21dc-47ab-887f-46898e05df2f';
+
+UPDATE public."user" SET "status" = 'locked' WHERE public."user"."id" IN (SELECT public.organization_user."userId" FROM public.organization_user WHERE public.organization_user."organizationId" = '7da62c1a-bdfc-494b-a80e-94cfb750f491');
+
+UPDATE public."organization" SET "status" = 'inactive' WHERE public."organization"."id" = '7da62c1a-bdfc-494b-a80e-94cfb750f491';
+
+UPDATE public."subscription" SET "status" = 'cancelled' WHERE public."subscription"."id" = 'c84c2415-cd82-4d18-a3ef-5987e891c614';
+
+UPDATE public."user" SET "status" = 'locked' WHERE public."user"."id" IN (SELECT public.organization_user."userId" FROM public.organization_user WHERE public.organization_user."organizationId" = '7f93d923-04e4-4eff-9b8c-9d026f403ffe');
+
+UPDATE public."organization" SET "status" = 'inactive' WHERE public."organization"."id" = '7f93d923-04e4-4eff-9b8c-9d026f403ffe';
+
+UPDATE public."subscription" SET "status" = 'cancelled' WHERE public."subscription"."id" = '1523d5c8-8102-4d41-a254-dbc0d654eeb1';
+
